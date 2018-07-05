@@ -1,0 +1,19 @@
+{
+  "name": "weather-by-tom",
+  "description": "An AngularJS Example by Tom Beaver",
+  "version": "0.0.0",
+  "homepage": "",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "1.5.x",
+    "angular-animate": "1.5.x",
+    "angular-resource": "1.5.x",
+    "angular-route": "1.5.x",
+    "bootstrap": "3.3.x",
+    "jquery": "2.2.x",
+    "angular-moment": "^1.2.0",
+    "moment": "^2.22.2",
+    "angular-local-storage": "^0.7.1"
+  }
+}

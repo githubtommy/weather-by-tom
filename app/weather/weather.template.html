@@ -1,0 +1,408 @@
+<div class="container-fluid wcontentarea">
+
+  <!-- searchbar: begin -->
+  <div class="row wsearchbar">
+    <div class="col-sm-3">
+      <label>Choose a Favorite City:</label>
+      <select class="form-control" data-ng-model="selectedLocation" data-ng-options="city as city for city in savedCityList" ></select>
+    </div>
+
+    <div class="col-sm-3">
+      <label>Choose a City by Name or Zip Code:</label>
+      <input type="text" class="form-control" data-ng-model="selectedLocation" />
+    </div>
+
+    <div class="col-sm-2 wsearchbar-button">
+      <button class="btn btn-info btn-block" data-ng-click="fetchWeatherData()">Get Weather</button>
+    </div>
+
+    <div class="col-sm-2 wsearchbar-button">
+      <button class="btn btn-info btn-block" data-ng-click="saveCity()" data-ng-disabled="shouldSaveButtonBeDisabled()">Save City</button>
+    </div>
+
+  </div>
+  <!-- searchbar: end -->
+
+
+
+  <!-- ---------------------------- -->
+  <!-- card: begin -->
+  <!-- ---------------------------- -->
+
+  <div class="col-sm-12 wcard" ng-if="todayReady && forecastReady">
+
+  <!-- city header -->
+  <div class="row">
+    <div>
+      <div class="wcard-cityheader">{{getCityDisplayName() | uppercase}}</div>
+    </div>
+  </div>
+
+  <!-- bigicon row: begin -->
+
+  <div class="row">
+
+
+  </div>
+
+  <!-- bigicon row: begin -->
+  <div class="row">
+    <div class="col-sm-12 wcard-bigiconrow">
+      <i class="{{today.iconClass}}" style="font-size:64px"></i>
+    </div>
+  </div>
+
+  <!-- ------------------------------------------------------------------------------ -->
+  <!-- datarow: begin -->
+  <!-- ------------------------------------------------------------------------------ -->
+
+  <div class="row">
+
+  <!-- --------------------------------------- -->
+  <!-- today column: begin -->
+  <!-- --------------------------------------- -->
+
+    <!-- temperature -->
+    <div class="col-sm-2 wcard-daycontainer wboxtoday">
+
+      <div class="row">
+        <span class="wtemp-number">{{getTemperatureForToday()}}</span>
+        <span class="wtemp-degree">°</span>
+      </div>
+
+    <!-- row1 -->
+      <div class="row wbox-row1">
+        <span>{{today.weather[0].main | capitalize}}</span>
+      </div>
+
+    <!-- row2 -->
+      <div class="row wbox-row2">
+        <span>{{today.main.clouds.all + "% Cloudy"}}</span>
+      </div>
+
+    <!-- row3 -->
+      <div class="row wbox-row3">
+        <span>{{today.main.humidity + "% Humidity"}}</span>
+      </div>
+
+    <!-- row4 -->
+      <div class="row wbox-row4">
+        <span>Wind</span>
+      </div>
+
+    <!-- row5 -->
+      <div class="row wbox-row5">
+        <span>{{buildWindDisplay(today.wind.deg, today.wind.speed)}}</span>
+      </div>
+
+    <!-- row6 -->
+      <div class="row wbox-row6">
+        <span>Barometer</span>
+      </div>
+
+    <!-- row7 -->
+      <div class="row wbox-row7">
+        <span>{{today.main.pressure}}</span>
+      </div>
+
+    </div>
+
+
+    <!-- --------------------------------------- -->
+      <!-- future day 0 column: begin -->
+    <!-- --------------------------------------- -->
+
+    <div class="col-sm-2">
+
+      <!-- row0 / date -->
+      <div class="row wbox-row0">
+        <span>{{forecastDisplayValues[0].dayName + " " + forecastDisplayValues[0].dateOfMonth}}</span>
+      </div>
+
+      <!-- row0b / icon -->
+      <div class="row wbox-row0b">
+        <i class={{forecastDisplayValues[0].iconClass}}></i>
+      </div>
+
+      <!-- row1 -->
+      <div class="row wbox-row1">
+        <span>{{forecastDisplayValues[0].tempLow  + "° / " + forecastDisplayValues[0].tempHigh + "°"}}</span>
+
+    </div>
+
+      <!-- row2 -->
+      <div class="row wbox-row2">
+        <span>{{forecastDisplayValues[0].description | uppercase}}</span>
+      </div>
+
+      <!-- row3 -->
+      <div class="row wbox-row3">
+        <span>{{forecastDisplayValues[0].humidity | uppercase}}</span>
+      </div>
+
+      <!-- row4 -->
+      <div class="row wbox-row4">
+        <span>Wind</span>
+      </div>
+
+      <!-- row5 -->
+      <div class="row wbox-row5">
+        <span>{{forecastDisplayValues[0].wind | uppercase}}</span>
+      </div>
+
+      <!-- row6 -->
+      <div class="row wbox-row6">
+        <span>Barometer</span>
+      </div>
+
+      <!-- row7 -->
+      <div class="row wbox-row7">
+        <span>{{forecastDisplayValues[0].barometer | uppercase}}</span>
+      </div>
+    </div>
+
+
+    <!-- --------------------------------------- -->
+      <!-- future day 1 column: begin -->
+    <!-- --------------------------------------- -->
+
+    <div class="col-sm-2">
+
+      <!-- row0 / date -->
+      <div class="row wbox-row0">
+        <span>{{forecastDisplayValues[1].dayName + " " + forecastDisplayValues[1].dateOfMonth}}</span>
+      </div>
+
+      <!-- row0b / icon -->
+      <div class="row wbox-row0b">
+        <i class={{forecastDisplayValues[1].iconClass}}></i>
+      </div>
+
+      <!-- row1 -->
+      <div class="row wbox-row1">
+        <span>{{forecastDisplayValues[1].tempLow  + "° / " + forecastDisplayValues[1].tempHigh + "°"}}</span>
+
+    </div>
+
+      <!-- row2 -->
+      <div class="row wbox-row2">
+        <span>{{forecastDisplayValues[1].description | uppercase}}</span>
+      </div>
+
+      <!-- row3 -->
+      <div class="row wbox-row3">
+        <span>{{forecastDisplayValues[1].humidity | uppercase}}</span>
+      </div>
+
+      <!-- row4 -->
+      <div class="row wbox-row4">
+        <span>Wind</span>
+      </div>
+
+      <!-- row5 -->
+      <div class="row wbox-row5">
+        <span>{{forecastDisplayValues[1].wind | uppercase}}</span>
+      </div>
+
+      <!-- row6 -->
+      <div class="row wbox-row6">
+        <span>Barometer</span>
+      </div>
+
+      <!-- row7 -->
+      <div class="row wbox-row7">
+        <span>{{forecastDisplayValues[1].barometer | uppercase}}</span>
+      </div>
+    </div>
+
+    <!-- --------------------------------------- -->
+      <!-- future day 2 column: begin -->
+    <!-- --------------------------------------- -->
+
+    <div class="col-sm-2">
+
+      <!-- row0 / date -->
+      <div class="row wbox-row0">
+        <span>{{forecastDisplayValues[2].dayName + " " + forecastDisplayValues[2].dateOfMonth}}</span>
+      </div>
+
+      <!-- row0b / icon -->
+      <div class="row wbox-row0b">
+        <i class={{forecastDisplayValues[2].iconClass}}></i>
+      </div>
+
+      <!-- row1 -->
+      <div class="row wbox-row1">
+        <span>{{forecastDisplayValues[2].tempLow  + "° / " + forecastDisplayValues[2].tempHigh + "°"}}</span>
+
+    </div>
+
+      <!-- row2 -->
+      <div class="row wbox-row2">
+        <span>{{forecastDisplayValues[2].description | uppercase}}</span>
+      </div>
+
+      <!-- row3 -->
+      <div class="row wbox-row3">
+        <span>{{forecastDisplayValues[2].humidity | uppercase}}</span>
+      </div>
+
+      <!-- row4 -->
+      <div class="row wbox-row4">
+        <span>Wind</span>
+      </div>
+
+      <!-- row5 -->
+      <div class="row wbox-row5">
+        <span>{{forecastDisplayValues[2].wind | uppercase}}</span>
+      </div>
+
+      <!-- row6 -->
+      <div class="row wbox-row6">
+        <span>Barometer</span>
+      </div>
+
+      <!-- row7 -->
+      <div class="row wbox-row7">
+        <span>{{forecastDisplayValues[2].barometer | uppercase}}</span>
+      </div>
+    </div>
+
+    <!-- --------------------------------------- -->
+      <!-- future day 3 column: begin -->
+    <!-- --------------------------------------- -->
+
+    <div class="col-sm-2">
+
+      <!-- row0 / date -->
+      <div class="row wbox-row0">
+        <span>{{forecastDisplayValues[3].dayName + " " + forecastDisplayValues[3].dateOfMonth}}</span>
+      </div>
+
+      <!-- row0b / icon -->
+      <div class="row wbox-row0b">
+        <i class={{forecastDisplayValues[3].iconClass}}></i>
+      </div>
+
+      <!-- row1 -->
+      <div class="row wbox-row1">
+        <span>{{forecastDisplayValues[3].tempLow  + "° / " + forecastDisplayValues[3].tempHigh + "°"}}</span>
+
+    </div>
+
+      <!-- row2 -->
+      <div class="row wbox-row2">
+        <span>{{forecastDisplayValues[3].description | uppercase}}</span>
+      </div>
+
+      <!-- row3 -->
+      <div class="row wbox-row3">
+        <span>{{forecastDisplayValues[3].humidity | uppercase}}</span>
+      </div>
+
+      <!-- row4 -->
+      <div class="row wbox-row4">
+        <span>Wind</span>
+      </div>
+
+      <!-- row5 -->
+      <div class="row wbox-row5">
+        <span>{{forecastDisplayValues[3].wind | uppercase}}</span>
+      </div>
+
+      <!-- row6 -->
+      <div class="row wbox-row6">
+        <span>Barometer</span>
+      </div>
+
+      <!-- row7 -->
+      <div class="row wbox-row7">
+        <span>{{forecastDisplayValues[3].barometer | uppercase}}</span>
+      </div>
+    </div>
+
+    <!-- --------------------------------------- -->
+      <!-- future day 4 column: begin -->
+    <!-- --------------------------------------- -->
+
+    <div class="col-sm-2">
+
+      <!-- row0 / date -->
+      <div class="row wbox-row0">
+        <span>{{forecastDisplayValues[4].dayName + " " + forecastDisplayValues[4].dateOfMonth}}</span>
+      </div>
+
+      <!-- row0b / icon -->
+      <div class="row wbox-row0b">
+        <i class={{forecastDisplayValues[4].iconClass}}></i>
+      </div>
+
+      <!-- row1 -->
+      <div class="row wbox-row1">
+        <span>{{forecastDisplayValues[4].tempLow  + "° / " + forecastDisplayValues[4].tempHigh + "°"}}</span>
+
+    </div>
+
+      <!-- row2 -->
+      <div class="row wbox-row2">
+        <span>{{forecastDisplayValues[4].description | uppercase}}</span>
+      </div>
+
+      <!-- row3 -->
+      <div class="row wbox-row3">
+        <span>{{forecastDisplayValues[4].humidity | uppercase}}</span>
+      </div>
+
+      <!-- row4 -->
+      <div class="row wbox-row4">
+        <span>Wind</span>
+      </div>
+
+      <!-- row5 -->
+      <div class="row wbox-row5">
+        <span>{{forecastDisplayValues[4].wind | uppercase}}</span>
+      </div>
+
+      <!-- row6 -->
+      <div class="row wbox-row6">
+        <span>Barometer</span>
+      </div>
+
+      <!-- row7 -->
+      <div class="row wbox-row7">
+        <span>{{forecastDisplayValues[4].barometer | uppercase}}</span>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+  </div>
+  <!-- datarow: end -->
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  <!-- ---------------------------- -->
+  <!-- card: end -->
+  <!-- ---------------------------- -->
+
+
+
+
+
+</div>

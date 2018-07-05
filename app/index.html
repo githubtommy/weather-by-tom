@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" ng-app="weatherByTomApp" ng-controller="MainController">
+  <head>
+    <meta charset="utf-8">
+    <title>WeatherByTom</title>
+
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
+
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular-moment/angular-moment.js"></script>
+
+    <script src="app.module.js"></script>
+    <script src="app.config.js"></script>
+    <script src="core/core.module.js"></script>
+
+    <script src="core/weather/weatherByCity.module.js"></script>
+    <script src="core/weather/weatherByCity.service.js"></script>
+    <script src="core/weather/weatherByZip.module.js"></script>
+    <script src="core/weather/weatherByZip.service.js"></script>
+
+    <script src="weather/weather.module.js"></script>
+    <script src="weather/weather.component.js"></script>
+
+    <script src="about/about.module.js"></script>
+    <script src="about/about.component.js"></script>
+
+    <script src="purpose/purpose.module.js"></script>
+    <script src="purpose/purpose.component.js"></script>
+
+    <!-- For the weather icons -->
+    <link rel="stylesheet" href="css/weather-icons-wind.css" />
+    <link rel="stylesheet" href="css/weather-icons.css" />
+
+
+  </head>
+  <body class="wpage">
+
+    <!-- HEADER AND NAVBAR -->
+    <header>
+        <nav class="navbar navbar-default wnavcontainer">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Tom Beaver AngularJS Example</a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#purpose">Objective</a></li>
+            </ul>
+        </div>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT AND INJECTED VIEWS -->
+
+    <div class="view-container">
+      <div ng-view class="view-frame"></div>
+    </div>
+
+  </body>
+</html>

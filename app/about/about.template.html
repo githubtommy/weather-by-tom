@@ -1,0 +1,38 @@
+<div class="container-fluid wcontentarea aboutpage">
+	<h1>Overview</h1>
+	<p>This weather app a programming example built on AngularJS 1.5.11. It uses the OpenWeatherApp API 0.1.6. It borrows the basic design of the Bing weather app on Windows desktop. I have tested it only on Chrome.</p>
+
+	<p>The app is functional and the code is fairly tight, but this was a quick demonstration project. Some of the first things I would do if this were a real-world project are: convert "wind" and "barometer" values into something more meaningful; various refactorings; test on multiple browswers.</p>
+	<h1>Main Features</h1>
+	<ul>
+		<li>One button calls both the current-weather API and the 5-day forecast API</li>
+		<li>The user can input either a city name or a zip code. The app detects whether a zip code has been entered and forms its call to the api accordingly</li>
+		<li>The user can also pick a city from a dropdown of previously saved cities</li>
+		<li>Cities can be saved to the user's local storage</li>
+		<li>The same city is not saved multiple times</li>
+		<li>The "Save City" button is disabled when there is no city to save</li>
+	</ul>
+	<h1>Technical Points of Interest</h1>
+	<ul>
+		<li>Integrates third-party weather icons, mapping the OpenWeather codes to the appropriate icons</li>
+		<li>Modifies the incoming weather data for ease-of-use in the markup</li>
+		<li>Implements routing</li>
+		<li>Uses Angular Resource rather than $http</li>
+		<li>Implements AngularJS components instead of controllers</li>
+		<li>Is installable via <pre>npm install</pre></li>
+		<li>Is runnable using <pre>npm start</pre></li>
+		<li>Uses dynamically loaded webfonts</li>
+	</ul>
+	<h1>Technologies Uses</h1>
+	<ul>
+		<li>AngularJS 1.5.11</li>
+		<li>Bootstrap 3.3.7</li>
+		<li>Angular Moment</li>
+		<li>Angular Local Storage</li>
+		<li>Angular Resource</li>
+		<li>node and npm</li>
+		<li>bower</li>
+		<li>Coded in SublimeText3</li>
+	</ul>
+
+</div>
